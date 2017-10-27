@@ -35,8 +35,10 @@ var bot = new builder.UniversalBot(connector, [
   function (session, results) {
       session.dialogData.reservationName = results.response;
 
+
+      var day=dateFormat(session.dialogData.reservationDate, "yyyy-mm-dd h:MM:ss");
       // Process request and display reservation details
-      session.send(`Reservation confirmed.<br/>${session.dialogData.reservationName} booked a cab for ${session.dialogData.reservationDate}.`);
+      session.send(`Reservation confirmed.<br/>${session.dialogData.reservationName} booked a cab for ${day}.`);
       session.endDialog();
   }
 ]);
