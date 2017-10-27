@@ -25,7 +25,7 @@ server.post('/api/messages', connector.listen());
 var bot = new builder.UniversalBot(connector, [
   function (session) {
       session.send("Sure! I can book that for you");
-      builder.Prompts.time(session, "What time do want it to be booked)");
+      builder.Prompts.time(session, "What time do want it to be booked?");
   },
 
   function (session, results) {
@@ -36,7 +36,7 @@ var bot = new builder.UniversalBot(connector, [
       session.dialogData.reservationName = results.response;
 
       // Process request and display reservation details
-      session.send('Reservation confirmed. Reservation details: <br/>Date/Time: ${session.dialogData.reservationDate}');
+      session.send(`Reservation confirmed.<br/>${session.dialogData.reservationName} booked a cab for ${session.dialogData.reservationDate}.`);
       session.endDialog();
   }
 ]);
