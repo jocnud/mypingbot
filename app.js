@@ -1,6 +1,5 @@
 var restify = require('restify');
 var builder = require('botbuilder');
-var dateFormat = require('dateformat');
 
 // Setup Restify Server
 var server = restify.createServer();
@@ -35,11 +34,8 @@ var bot = new builder.UniversalBot(connector, [
   },
   function (session, results) {
       session.dialogData.reservationName = results.response;
-
-
-      var day=dateFormat(result.request_date, "yyyy-mm-dd h:MM:ss");
       // Process request and display reservation details
-      session.send(`Reservation confirmed.<br/>${session.dialogData.reservationName} booked a cab for ${day}.`);
+      session.send(`Reservation confirmed.<br/>${session.dialogData.reservationName} booked a cab for ${session.dialogData.reservationDate}.`);
       session.endDialog();
   }
 ]);
