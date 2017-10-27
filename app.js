@@ -29,7 +29,7 @@ var bot = new builder.UniversalBot(connector, [
   },
 
   function (session, results) {
-      session.dialogData.reservationDate = results.response;
+      session.dialogData.reservationDate = builder.EntityRecognizer.resolveTime([results.response]);
       builder.Prompts.text(session, "Who's name will this reservation be under?");
   },
   function (session, results) {
