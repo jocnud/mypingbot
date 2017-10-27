@@ -17,7 +17,9 @@ var connector = new builder.ChatConnector({
 // Listen for messages from users 
 server.post('/api/messages', connector.listen());
 
-
+if(session.message.text=='a'){
+  startProactiveDialog(session.message.text)
+}
 
 var bot = new builder.UniversalBot(connector, [
   function (session) {
@@ -52,3 +54,7 @@ bot.dialog('proactiveDialog', function (session, args) {
           startProactiveDialog(savedAddress);
       }, 5000);
   });
+
+  function startProactiveDialog(address) {
+    bot.beginDialog(address, "*:/survey");  
+  }
