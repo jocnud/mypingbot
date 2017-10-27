@@ -24,22 +24,19 @@ server.post('/api/messages', connector.listen());
 
 var bot = new builder.UniversalBot(connector, [
   function (session) {
-      session.send("Welcome to the dinner reservation.");
-      builder.Prompts.time(session, "Please provide a reservation date and time (e.g.: June 6th at 5pm)");
+      session.send("Sure! I can book that for you");
+      builder.Prompts.time(session, "What time do want it to be booked)");
   },
+
   function (session, results) {
-      session.dialogData.reservationDate = builder.EntityRecognizer.resolveTime([results.response]);
-      builder.Prompts.text(session, "How many people are in your party?");
-  },
-  function (session, results) {
-      session.dialogData.partySize = results.response;
+      session.dialogData.reservationDate = results.response;
       builder.Prompts.text(session, "Who's name will this reservation be under?");
   },
   function (session, results) {
       session.dialogData.reservationName = results.response;
 
       // Process request and display reservation details
-      session.send(`Reservation confirmed. Reservation details: <br/>Date/Time: ${session.dialogData.reservationDate} <br/>Party size: ${session.dialogData.partySize} <br/>Reservation name: ${session.dialogData.reservationName}`);
+      session.send('Reservation confirmed. Reservation details: <br/>Date/Time: ${session.dialogData.reservationDate}');
       session.endDialog();
   }
 ]);
