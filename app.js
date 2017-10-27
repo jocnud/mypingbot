@@ -23,11 +23,6 @@ server.post('/api/messages', connector.listen());
 
 
 // Ask the user for their name and greet them by name.
-bot.dialog('greetings', [
-    function (session) {
-        builder.Prompts.text(session, 'Hi! What is your name?');
-    },
-    function (session, results) {
-        session.endDialog(`Hello ${results.response}!`);
-    }
-]);
+bot.dialog("/", function(session){
+  session.send("Hello there!")
+});
