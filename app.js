@@ -17,10 +17,6 @@ var connector = new builder.ChatConnector({
 // Listen for messages from users 
 server.post('/api/messages', connector.listen());
 
-// Receive messages from the user and respond by echoing each message back (prefixed with 'You said:')
-// var bot = new builder.UniversalBot(connector, function (session) {
-//    session.send("You said: %s", session.message.text);
-// });
 
 
 var bot = new builder.UniversalBot(connector, [
@@ -40,3 +36,19 @@ var bot = new builder.UniversalBot(connector, [
       session.endDialog();
   }
 ]);
+
+
+bot.dialog('proactiveDialog', function (session, args) {
+  
+      savedAddress = session.message.address;
+  
+      var message = 'Hey there, I\'m going to interrupt our conversation and start a survey in five seconds...';
+      session.send(message);
+  
+      message = `You can also make me send a message by accessing: http://localhost:${server.address().port}/api/CustomWebApi`;
+      session.send(message);
+  
+      setTimeout(() => {
+          startProactiveDialog(savedAddress);
+      }, 5000);
+  });
