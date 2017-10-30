@@ -23,6 +23,8 @@ var bot = new builder.UniversalBot(connector, [
   function (session) {
       session.send("Sure! I can book that for you");
       builder.Prompts.time(session, "What time do want it to be booked?");
+
+      createSigninCard(session);
   },
 
   function (session, results) {
@@ -32,13 +34,18 @@ var bot = new builder.UniversalBot(connector, [
   function (session, results) {
       session.dialogData.reservationName = results.response;
       // Process request and display reservation details
-      // session.send(`Reservation confirmed.<br/>${session.dialogData.reservationName} booked a cab for ${moment(session.dialogData.reservationDate).format('DD MMM H:mm')}.`);
-
-      session.say('Please hold while I calculate a response.', 
-        'Please hold while I calculate a response.', 
-        { inputHint: builder.InputHint.ignoringInput }
-      );
+      session.send(
+          `Reservation confirmed.<br/>${session.dialogData.reservationName} 
+          booked a cab for ${moment(session.dialogData.reservationDate).format('DD MMM H:mm')}.`
+        );
 
       session.endDialog();
   }
 ]);
+
+
+function createSigninCard(session) {
+  return new builder.SigninCard(session)
+      .text('BotFramework Sign-in Card')
+      .button('Sign-in', 'https://login.microsoftonline.com')
+}
