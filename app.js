@@ -32,9 +32,9 @@ var bot = new builder.UniversalBot(connector, [
   function (session, results) {
       session.dialogData.reservationName = results.response;
       // Process request and display reservation details
-      session.send(`Reservation confirmed.<br/>${session.dialogData.reservationName} booked a cab for ${moment(session.dialogData.reservationDate).format('DD MMM H:mm')}.`);
+      // session.send(`Reservation confirmed.<br/>${session.dialogData.reservationName} booked a cab for ${moment(session.dialogData.reservationDate).format('DD MMM H:mm')}.`);
 
-      session.say(`Reservation confirmed.<br/>${session.dialogData.reservationName} booked a cab for ${moment(session.dialogData.reservationDate).format('DD MMM H:mm')}.`);
+      session.say("Reservation confirmed");
 
 
       session.endDialog();
