@@ -21,10 +21,9 @@ server.post('/api/messages', connector.listen());
 
 var bot = new builder.UniversalBot(connector, [
   function (session) {
+      createSigninCard(session);
       session.send("Sure! I can book that for you");
       builder.Prompts.time(session, "What time do want it to be booked?");
-
-      createSigninCard(session);
   },
 
   function (session, results) {
