@@ -20,10 +20,7 @@ server.post('/api/messages', connector.listen());
 
 var bot = new builder.UniversalBot(connector, [
   function (session) {
-      builder.Prompts.choice(session, 'Hello', CardNames, {
-          maxRetries: 3,
-          retryPrompt: 'Ooops, what you wrote is not a valid option, please try again'
-      });
+    builder.Prompts.time(session, "You need to login");
   },
   function (session, results) {
       // attach the card to the reply message
