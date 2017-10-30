@@ -50,24 +50,24 @@ bot.dialog('showShirts', function (session) {
 }).triggerAction({ matches: /^(show|list)/i });
 
 
-var bot = new builder.UniversalBot(connector, [
-  function (session) {
-      session.send("Sure! I can book that for you");
-      builder.Prompts.time(session, "What time do want it to be booked?");
-  },
+// var bot = new builder.UniversalBot(connector, [
+//   function (session) {
+//       session.send("Sure! I can book that for you");
+//       builder.Prompts.time(session, "What time do want it to be booked?");
+//   },
 
-  function (session, results) {
-      session.dialogData.reservationDate = builder.EntityRecognizer.resolveTime([results.response]);
-      builder.Prompts.text(session, "Who's name will this reservation be under?");
-  },
-  function (session, results) {
-      session.dialogData.reservationName = results.response;
-      // Process request and display reservation details
-      session.send(
-          `Reservation confirmed.<br/>${session.dialogData.reservationName} 
-          booked a cab for ${moment(session.dialogData.reservationDate).format('DD MMM H:mm')}.`
-        );
+//   function (session, results) {
+//       session.dialogData.reservationDate = builder.EntityRecognizer.resolveTime([results.response]);
+//       builder.Prompts.text(session, "Who's name will this reservation be under?");
+//   },
+//   function (session, results) {
+//       session.dialogData.reservationName = results.response;
+//       // Process request and display reservation details
+//       session.send(
+//           `Reservation confirmed.<br/>${session.dialogData.reservationName} 
+//           booked a cab for ${moment(session.dialogData.reservationDate).format('DD MMM H:mm')}.`
+//         );
 
-      session.endDialog();
-  }
-]);
+//       session.endDialog();
+//   }
+// ]);
