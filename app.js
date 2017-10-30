@@ -34,9 +34,13 @@ var bot = new builder.UniversalBot(connector, [
       // Process request and display reservation details
       // session.send(`Reservation confirmed.<br/>${session.dialogData.reservationName} booked a cab for ${moment(session.dialogData.reservationDate).format('DD MMM H:mm')}.`);
 
-      session.say("Reservation confirmed");
 
+      var msg = new builder.Message(session)
+      .speak('Reservation confirmed')
+      .inputHint(builder.InputHint.ignoringInput);
 
-      session.endDialog();
+      session.send(msg).endDialog();
+
+      //session.endDialog();
   }
 ]);
